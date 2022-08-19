@@ -1,6 +1,92 @@
 ﻿@{
     ViewData["Title"] = "My Gallery";
 }
-<h1>@ViewData["Title"]</h1>
+<style>
+    /* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
 
-<p>Use this page to List the Gallery.</p>
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container (positioning is needed to position the close button and the text) */
+.container {
+  position: relative;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: white;
+  font-size: 20px;
+}
+
+/* Closable button inside the image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+</style>
+<h1>@ViewData["Title"]</h1>
+<div style="text-align:center">
+  <p>Click on the images below:</p>
+</div>
+
+<div class="row">
+    <div class="column">
+        <img src="~/Images/SAI97787.JPG" alt="eng1" style="width:100%" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="~/Images/SAI97838.JPG" alt="eng2" style="width:100%" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="~/Images/SAI97872.JPG" alt="eng3" style="width:100%" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="~/Images/SAI97875.JPG" alt="eng4" style="width:100%" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="~/Images/SAI97908.JPG" alt="eng5" style="width:100%" onclick="myFunction(this);">
+    </div>
+</div>
+
+<div class="container">
+  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+  <img id="expandedImg" style="width:100%">
+  <div id="imgtext"></div>
+</div>
+
+@section Scripts{
+    <script>
+        function myFunction(imgs) {
+            var expandImg = document.getElementById("expandedImg");
+            var imgText = document.getElementById("imgtext");
+            expandImg.src = imgs.src;
+            imgText.innerHTML = imgs.alt;
+            expandImg.parentElement.style.display = "block";
+        }
+    </script>
+}
